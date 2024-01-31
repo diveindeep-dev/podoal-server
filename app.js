@@ -7,11 +7,22 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
-import { CLIENT_URL, PORT } from './config/index.js';
+import { CLIENT_URL, DB_URL, PORT } from './config/index.js';
 import indexRouter from './routes/index.js';
 
 const app = express();
+
+mongoose.set('strictQuery', true);
+
+mongoose.connect(DB_URL);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('DB connected!');
+});
 
 const corsOptions = {
   origin: CLIENT_URL,
