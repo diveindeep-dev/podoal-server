@@ -1,0 +1,23 @@
+{
+  "name": "podoal-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
+  },
+  "dependencies": {
+    "axios": "^1.1.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
