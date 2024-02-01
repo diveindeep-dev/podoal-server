@@ -8,9 +8,9 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
 import { CLIENT_URL, DB_URL, PORT } from './config/index.js';
-import indexRouter from './routes/index.js';
+
+import authRouter from './routes/auth/index.js';
 
 const app = express();
 
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
   res.send('Hello World: Server with express');
 });
 
-app.use('/api', indexRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
