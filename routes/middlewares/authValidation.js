@@ -36,20 +36,14 @@ export const verifyToken = (req, res, next) => {
   const bearer = headerToken.split(' ');
   const token = bearer[1];
 
-  try {
-    if (token === 'null') {
-      return req.status(STATUS.FORBIDDEN).json({ message: '토큰 없음' });
+  jwt.verify(token, process.env.JWT_SECRET, (err, authorized) => {
+    if (err) {
+      return res
+        .status(STATUS.UNAUTHORIZED)
+        .json({ message: '로그인이 필요합니다.' });
+    } else {
+      req.authorizedUser = authorized;
+      next();
     }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, authorized) => {
-      if (err) {
-        return res.status(STATUS.FORBIDDEN).json({ message: '토큰 오류' });
-      } else {
-        req.authorizedUser = authorized;
-      }
-    });
-    next();
-  } catch (error) {
-    next(error);
-  }
+  });
 };
