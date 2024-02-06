@@ -11,6 +11,7 @@ import mongoose from 'mongoose';
 import { CLIENT_URL, DB_URL, PORT } from './config/index.js';
 
 import authRouter from './routes/auth/index.js';
+import podoRouter from './routes/podo/index.js';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/podo', podoRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

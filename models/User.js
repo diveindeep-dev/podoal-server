@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
   profileId: { type: String, reqire: true },
   name: { type: String, reqire: true },
   password: { type: String, require: true },
+  podos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Podo', default: [] }],
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', default: [] }],
 });
 
 userSchema.pre('save', function (next) {
